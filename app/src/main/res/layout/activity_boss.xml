@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.xueyudlut.connectsql.BossActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewbilldate"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+
+                android:text="发票日期"
+                android:layout_alignBaseline="@+id/textViewbillnum"
+                android:layout_alignBottom="@+id/textViewbillnum"
+                android:layout_toEndOf="@+id/textViewbillnum" />
+
+            <TextView
+                android:id="@+id/users_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView4"
+                android:layout_below="@+id/btn_finduser"
+                android:textColor="@color/royalblue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btn_finduser"
+                android:layout_alignBottom="@+id/btn_finduser"
+                android:layout_marginStart="102dp"
+                android:layout_toEndOf="@+id/btn_finduser"
+                android:text="姓名"
+                android:textColor="@color/royalblue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_finduser"
+                android:layout_marginStart="31dp"
+                android:layout_marginTop="41dp"
+                android:text="查询员工"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_finduser"
+                android:layout_alignStart="@+id/btn_finduser"
+                android:text="查询记录"
+                android:layout_marginTop="19dp"
+                android:id="@+id/btn_findmsg" />
+
+            <TextView
+                android:id="@+id/tx_providername"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textViewbillmoney"
+                android:layout_alignBottom="@+id/textViewbillmoney"
+                android:layout_toEndOf="@+id/textViewbillmoney"
+                android:text="提交人" />
+
+            <TextView
+                android:id="@+id/textViewbillmoney"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="发票金额"
+                android:layout_alignBaseline="@+id/textViewbilldate"
+                android:layout_alignBottom="@+id/textViewbilldate"
+                android:layout_toEndOf="@+id/textViewbilldate" />
+
+            <TextView
+                android:id="@+id/textViewcode"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="发票代码"
+                android:layout_below="@+id/btn_findmsg"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/textViewbillnum"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="发票号码"
+
+                android:layout_below="@+id/btn_findmsg"
+                android:layout_toEndOf="@+id/textViewcode" />
+        </RelativeLayout>
+
+
+</RelativeLayout>

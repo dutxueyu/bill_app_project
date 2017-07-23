@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.xueyudlut.connectsql.MainActivity">
+
+
+
+    <TextView
+        android:id="@+id/autoCompleteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/royalblue"
+        android:layout_marginTop="75dp"
+        android:text="MOS移动财务系统" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:id="@+id/log_radiogroup"
+        android:visibility="gone"
+        android:layout_alignStart="@+id/autoCompleteTextView"
+        android:layout_below="@+id/autoCompleteTextView"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radiobtn_boss_log"
+            android:layout_width="110dp"
+            android:checked="true"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="管理员" />
+
+        <RadioButton
+            android:id="@+id/radioBtn_user_log"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignTop="@+id/radiobtn_boss_log"
+            android:layout_toEndOf="@+id/radiobtn_boss_log"
+            android:text="员工" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/txt_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/autoCompleteTextView"
+        android:layout_below="@+id/autoCompleteTextView"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="90dp"
+        android:textColor="@color/royalblue"
+        android:textColorHint="@color/grey"
+        android:ems="10"
+        android:hint="用户名"
+       />
+
+    <EditText
+        android:id="@+id/txt_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_username"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="密码"
+        android:textColor="@color/midnightblue"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:textColorHint="@color/grey" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_password"
+        android:text="登陆"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp" />
+    <Button
+        android:id="@+id/btn_sign"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="21dp"
+        android:text="注册" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:id="@+id/processbar"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/btn_sign"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+</RelativeLayout>

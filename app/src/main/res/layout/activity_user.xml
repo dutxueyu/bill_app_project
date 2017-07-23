@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.xueyudlut.connectsql.UserActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:textStyle="bold"
+
+        android:textColor="@color/royalblue"
+        android:layout_marginTop="60dp"
+        android:text="用户界面"
+        android:id="@+id/textView" />
+
+
+    <EditText
+        android:id="@+id/editText_billcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="发票代号"
+        android:inputType="number"
+        android:textColor="@color/royalblue"
+        android:textColorHint="@color/grey"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editText_billnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:inputType="number"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="发票号码"
+        android:textColor="@color/royalblue"
+        android:textColorHint="@color/grey"
+        android:layout_below="@+id/editText_billcode"
+        android:layout_alignStart="@+id/editText_billcode" />
+
+    <EditText
+        android:id="@+id/editText_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="date"
+        android:hint="开票日期"
+        android:textColor="@color/royalblue"
+        android:textColorHint="@color/grey"
+        android:layout_below="@+id/editText_billnum"
+        android:layout_alignStart="@+id/editText_billnum" />
+    <EditText
+        android:id="@+id/editText_billmoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/royalblue"
+        android:textColorHint="@color/grey"
+        android:ems="10"
+        android:hint="金额"
+        android:layout_below="@+id/editText_date"
+        android:layout_alignStart="@+id/editText_date" />
+    <Button
+        android:layout_width="210dp"
+        android:id="@+id/btn_UpLoadData"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_billmoney"
+        android:text="提交数据"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
+    <Button
+        android:layout_width="210dp"
+        android:id="@+id/btn_QR"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_UpLoadData"
+        android:layout_centerHorizontal="true"
+        android:text="二维码自动识别"
+        android:layout_marginTop="25dp" />
+
+</RelativeLayout>
