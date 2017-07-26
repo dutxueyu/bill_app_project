@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ConnectSQL.iml" filepath="$PROJECT_DIR$/ConnectSQL.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bill_app_project.iml" filepath="$PROJECT_DIR$/bill_app_project.iml" />
     </modules>
   </component>
 </project>

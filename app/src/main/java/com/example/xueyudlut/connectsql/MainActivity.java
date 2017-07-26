@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements View.OnClickListener{
 
-    RadioButton rb_boss;
-    RadioButton rb_user;
-    EditText et_username;
-    EditText et_password;
-    ProgressBar progressBar;
+    private   RadioButton rb_boss;
+    private RadioButton rb_user;
+    private EditText et_username;
+    private EditText et_password;
+    private ProgressBar progressBar;
     // 执行语句
     private String sql = "USE [bill_data] insert into [Test_table]([id],[name]) values ('2','aaa')";
 
@@ -37,13 +37,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
             if (msg.what==1){
                 Toast.makeText(getApplicationContext(),"登陆成功！",Toast.LENGTH_LONG).show();
                 //跳转管理员界面
-                startActivity(new Intent(MainActivity.this,BossActivity.class));
-
+                startActivity(new Intent(MainActivity.this,BossmenuActivity.class));
             }
              if (msg.what==2){
                  Toast.makeText(getApplicationContext(),"登陆成功！",Toast.LENGTH_LONG).show();
                  //跳转用户界面
-                 startActivity(new Intent(MainActivity.this,UserActivity.class));
+                 startActivity(new Intent(MainActivity.this,UserMenuActivity.class));
              }
             progressBar.setVisibility(View.GONE);
         }
@@ -65,6 +64,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         et_username = findViewById(R.id.txt_username);
         et_password = findViewById(R.id.txt_password);
         progressBar = findViewById(R.id.processbar);
+        et_username.setText("1");
+        et_password.setText("1");
     }
 
     @Override

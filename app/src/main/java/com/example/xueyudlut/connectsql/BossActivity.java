@@ -12,12 +12,12 @@ import java.util.List;
 
 public class BossActivity extends Activity implements View.OnClickListener{
 
-    TextView billcode;
-    TextView billnum;
-    TextView billmoney;
-    TextView billdate;
-    TextView person;
-    TextView username;
+    private TextView billcode;
+    private TextView billnum;
+    private TextView billmoney;
+    private TextView billdate;
+    private TextView person;
+    private TextView username;
     DatabaseHandle databaseHandle = DatabaseHandle.getDatabaseHandle();
     Handler handler = new Handler(){
         @Override

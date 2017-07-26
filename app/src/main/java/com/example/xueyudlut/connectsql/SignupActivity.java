@@ -21,17 +21,17 @@ import java.sql.Struct;
 
 public class SignupActivity extends Activity {
 
-    EditText et_username;
-    EditText et_psword1;
-    EditText et_psword2;
-    EditText et_org;
-    EditText et_name;
-    Button btn_signup;
-    ProgressBar progressBar;
-    RadioGroup rg;
-    RadioButton rd_boss;
-    RadioButton rd_use;
-    DatabaseHandle databaseHandle = DatabaseHandle.getDatabaseHandle();
+    private EditText et_username;
+    private EditText et_psword1;
+    private EditText et_psword2;
+    private EditText et_org;
+    private EditText et_name;
+    private Button btn_signup;
+    private ProgressBar progressBar;
+    private RadioGroup rg;
+    private RadioButton rd_boss;
+    private RadioButton rd_use;
+    private DatabaseHandle databaseHandle = DatabaseHandle.getDatabaseHandle();
     Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

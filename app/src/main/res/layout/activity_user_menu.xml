@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.xueyudlut.connectsql.UserMenuActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/royalblue"
+        android:layout_marginTop="60dp"
+        android:text="用户界面"
+        />
+    <Button
+        android:id="@+id/btn_2upload"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交发票"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="15dp"
+        android:layout_marginBottom="33dp"
+        android:layout_above="@+id/btn_billchecked"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btn_billchecked"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_margin="15dp"
+        android:layout_height="wrap_content"
+        android:text="报销查询"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

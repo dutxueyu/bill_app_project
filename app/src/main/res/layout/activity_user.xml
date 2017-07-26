@@ -13,7 +13,6 @@
         android:layout_centerHorizontal="true"
         android:textSize="25sp"
         android:textStyle="bold"
-
         android:textColor="@color/royalblue"
         android:layout_marginTop="60dp"
         android:text="用户界面"
@@ -78,17 +77,26 @@
         android:layout_width="210dp"
         android:id="@+id/btn_UpLoadData"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText_billmoney"
+        android:layout_below="@+id/btn_getbillimage"
         android:text="提交数据"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="15dp" />
     <Button
         android:layout_width="210dp"
         android:id="@+id/btn_QR"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_UpLoadData"
+        android:layout_below="@+id/editText_billmoney"
         android:layout_centerHorizontal="true"
         android:text="二维码自动识别"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="15dp" />
+    <Button
+        android:id="@+id/btn_getbillimage"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/btn_QR"
+        android:text="票据拍照"
+        android:layout_centerHorizontal="true"
+      />
 
 </RelativeLayout>
