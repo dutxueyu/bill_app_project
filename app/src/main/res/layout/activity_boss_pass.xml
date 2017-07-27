@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context="com.example.xueyudlut.connectsql.BossPassActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="是否审核通过？"
+        android:textSize="25sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:id="@+id/rb_passed"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="是"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:id="@+id/rb_nopassed"
+            android:layout_height="wrap_content"
+            android:text="否"
+            android:textSize="20sp"/>
+    </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="未通过原因或备注："/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:id="@+id/edit_nopassReson"
+        android:layout_height="wrap_content"
+        android:minEms="15"
+        android:minLines="3"
+        android:inputType="textMultiLine"
+        android:hint="（此项可以为空）"
+        android:textSize="20sp"
+        />
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交"/>
+
+</LinearLayout>

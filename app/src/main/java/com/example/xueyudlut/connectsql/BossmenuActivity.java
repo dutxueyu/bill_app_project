@@ -13,7 +13,6 @@ public class BossmenuActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bossmenu);
-
         btn_goCheckbill = findViewById(R.id.btn_billchecked);
         btn_goCheckbill.setOnClickListener(this);
         findViewById(R.id.btn_usermanage).setOnClickListener(this);
@@ -25,6 +24,7 @@ public class BossmenuActivity extends Activity implements View.OnClickListener{
             case R.id.btn_billchecked:
             {
                 Intent it =new Intent(BossmenuActivity.this,SearchlogActivity.class);
+                startActivity(it);
 
             }
         }

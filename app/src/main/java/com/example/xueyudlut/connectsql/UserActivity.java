@@ -26,6 +26,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -43,7 +44,10 @@ public class UserActivity extends Activity implements View.OnClickListener{
     private  String SDpath;
     private  String ImagePath;
     private  String smallImgPath;
+    private List<String> preMsglist;
     private  boolean hasGotImage = false;
+    private  boolean IsUpdateMode = false;
+    static  String get_string_num =null;
     //处理消息
     Handler handler = new Handler(){
         @Override
@@ -51,8 +55,17 @@ public class UserActivity extends Activity implements View.OnClickListener{
             super.handleMessage(msg);
             if (msg.what==1)
                 et_bill_num.setError("该发票数据已存在！");
-            if (msg.what==0)
+            if (msg.what==0){
                 Toast.makeText(getApplicationContext(),"数据提交成功！",Toast.LENGTH_LONG).show();
+                finish();
+            }
+            if (msg.what==101){
+                et_bill_num.setText(preMsglist.get(0));
+                et_bill_code.setText(preMsglist.get(1));
+                et_bill_date.setText(preMsglist.get(2));
+                et_bill_money.setText(preMsglist.get(3));
+                et_bill_num.setTextColor(getResources().getColor(R.color.grey));
+            }
             btn_upload.setClickable(true);
         }
     };
@@ -73,6 +86,23 @@ public class UserActivity extends Activity implements View.OnClickListener{
         SDpath = Environment.getExternalStorageDirectory().getPath()+ File.separator+"Android/data/"+getPackageName()+"files";
         ImagePath = SDpath+"/bill_image.png";
         smallImgPath =SDpath+"/"+"small_img.jpg";
+        //判断是否为更新数据模式
+        final Bundle bundle = getIntent().getExtras();
+        if (bundle!=null){
+            get_string_num = bundle.getString("billnum");
+            IsUpdateMode = true;
+            et_bill_num.setEnabled(false);
+            //processbar 可见
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    String sql = "USE [bill_data] SELECT [bill_num],[bill_code],[bill_date],[bill_moneynum]  FROM [bill_data].[dbo].[T_Message] where [bill_num]='"+get_string_num+"'";
+                    preMsglist = databaseHandle.SelectSQLname(sql);
+                    handler.sendEmptyMessage(101);
+                }
+            }).start();
+        }
+
 
     }
 
@@ -152,34 +182,61 @@ public class UserActivity extends Activity implements View.OnClickListener{
                     Toast.makeText(getApplicationContext(),"必填内容不能为空!",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (!hasGotImage){
-                    Toast.makeText(getApplicationContext(),"还未拍摄发票照片！",Toast.LENGTH_SHORT).show();
-                    return;
+                if (IsUpdateMode){
+                    btn_upload.setClickable(false);
+                    new Thread(new Runnable() {
+                        String billcode =  et_bill_code.getText().toString();
+                       // String billnum = et_bill_num.getText().toString();
+                        String billdata = et_bill_date.getText().toString();
+                        String billmoney = et_bill_money.getText().toString();
+                        int uid = MainActivity.main_uid;
+                        @Override
+                        public void run() {
+                            int t;
+                            if (hasGotImage){
+                                t =  databaseHandle.updatewithImage(uid,billcode,get_string_num,billdata,billmoney,smallImgPath);
+                            }else {
+                                String sql_noimg ="USE [bill_data] update [dbo].[T_Message] set [bill_code] ='"+billcode+"'," +
+                                        "[bill_date]='"+billdata+"',[bill_moneynum] ='"+billmoney+"' where [bill_num]='"+get_string_num+"'";
+                                 t =  databaseHandle.excuteSQL(sql_noimg);
+                            }
+                             String state = " USE [bill_data] update [dbo].[T_bossCheckMsg] set [int_boss_checkstate] ='0' where [int_cout_m] = (select [int_cout_m] from [bill_data].[dbo].[T_Message] where [bill_num]='"+get_string_num+"')";
+                             databaseHandle.excuteSQL(state);
+                            handler.sendEmptyMessage(t-1);
 
-                }
-                btn_upload.setClickable(false);
-                new Thread(new Runnable() {
-                    String billcode =  et_bill_code.getText().toString();
-                    String billnum = et_bill_num.getText().toString();
-                    String billdata = et_bill_date.getText().toString();
-                    String billmoney = et_bill_money.getText().toString();
-                    int uid = MainActivity.main_uid;
-                    @Override
-                    public void run() {
-                        String selectsql ="USE [bill_data] SELECT *  FROM [bill_data].[dbo].[T_Message] where [bill_num]='"+billnum+"'";
+                        }
+                    }).start();
+                } else
+                {
+                    if (!hasGotImage){
+                        Toast.makeText(getApplicationContext(),"还未拍摄发票照片！",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    btn_upload.setClickable(false);
+                    new Thread(new Runnable() {
+                        String billcode =  et_bill_code.getText().toString();
+                        String billnum = et_bill_num.getText().toString();
+                        String billdata = et_bill_date.getText().toString();
+                        String billmoney = et_bill_money.getText().toString();
+                        int uid = MainActivity.main_uid;
+                        @Override
+                        public void run() {
+                            String selectsql ="USE [bill_data] SELECT *  FROM [bill_data].[dbo].[T_Message] where [bill_num]='"+billnum+"'";
 //                        String insertsql ="USE [bill_data] INSERT INTO [dbo].[T_Message] ([int_uid],[bill_code],[bill_num],[bill_date],[bill_moneynum],[is_checked]"+
 //                                ")Values ('"+uid+"','"+billcode+"','"+billnum+"','"+billdata+"','"+billmoney+"','0')";
-                        String insertsql ="USE [bill_data] INSERT INTO [dbo].[T_Message] ([int_uid],[bill_code],[bill_num],[bill_date],[bill_moneynum],[is_checked]"+
-                                ")Values ('?','?','?','?','?','0')";
-                        if (databaseHandle.SelectSQL(selectsql))
-                            handler.sendEmptyMessage(1);
-                        else
+//                            String insertsql ="USE [bill_data] INSERT INTO [dbo].[T_Message] ([int_uid],[bill_code],[bill_num],[bill_date],[bill_moneynum],[is_checked]"+
+//                                    ")Values ('?','?','?','?','?','0')";
+                            if (databaseHandle.SelectSQL(selectsql))
+                                handler.sendEmptyMessage(1);
+                            else
                             {
                                 int t =  databaseHandle.insertwithImage(uid,billcode,billnum,billdata,billmoney,smallImgPath);
                                 handler.sendEmptyMessage(t-1);
+                            }
                         }
-                    }
-                }).start();
+                    }).start();
+                }
+
                 break;
             case R.id.btn_getbillimage:
                 getImageFromCamera();

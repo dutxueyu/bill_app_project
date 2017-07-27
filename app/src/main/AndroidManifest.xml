@@ -41,7 +41,8 @@
         <activity android:name=".UserMenuActivity" />
         <activity android:name=".SearchlogActivity" />
         <activity android:name=".ReadmsgActivity" />
-        <activity android:name=".BossmenuActivity"></activity>
+        <activity android:name=".BossmenuActivity" />
+        <activity android:name=".BossPassActivity"></activity>
     </application>
 
 </manifest>

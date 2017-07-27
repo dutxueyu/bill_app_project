@@ -1,11 +1,13 @@
 package com.example.xueyudlut.connectsql;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +27,8 @@ public class ReadmsgActivity extends Activity {
     private TextView billOrg;
     private TextView billChecked;
     private  TextView billusername;
+    private  TextView billcheckmsg;
+    private Button btn_reupload;
     DatabaseHandle databaseHandle = DatabaseHandle.getDatabaseHandle();
     Handler handler = new Handler(){
         @Override
@@ -37,10 +41,16 @@ public class ReadmsgActivity extends Activity {
             billdate.setText(list.get(3));
             billcode.setText(list.get(4));
             billmoney.setText(list.get(5));
-            if (list.get(6).toString().equals("0"))
+            if (list.get(6)==null || list.get(6).toString().equals("0"))
                 billChecked.setText("审核中");
-            else
+            else if (list.get(6).toString().equals("1")){
                 billChecked.setText("已批准");
+                btn_reupload.setVisibility(View.GONE);
+            }
+
+            else
+                billChecked.setText("未通过");
+            billcheckmsg.setText(list.get(7));
 
         }
     };
@@ -56,18 +66,38 @@ public class ReadmsgActivity extends Activity {
          billOrg= findViewById(R.id.read_org);
         billChecked= findViewById(R.id.read_billcheckstate);
         billusername = findViewById(R.id.read_username);
-
-        Bundle bundle = this.getIntent().getExtras();
+        billcheckmsg = findViewById(R.id.read_msg);
+        btn_reupload = findViewById(R.id.btn_reUpload);
+        if (MainActivity.main_usermode==1)
+            btn_reupload.setVisibility(View.GONE);
+        final Bundle bundle = this.getIntent().getExtras();
         num = bundle.getString("billnum");
         System.out.println(num);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 bitmap = databaseHandle.ReadDBImage(num);
-                String sql = "USE [bill_data] select [s_name],[s_orgname],[bill_num],[bill_date],[bill_code],[bill_moneynum],[is_checked]  from [bill_data].[dbo].[View_message] where bill_num ='"+num+"'";
+                String sql = "USE [bill_data] select [s_name],[s_orgname],[bill_num],[bill_date],[bill_code],[bill_moneynum],[int_boss_checkstate], [Str_readme] from [bill_data].[dbo].[View_message] where bill_num ='"+num+"'";
                 list = databaseHandle.SelectSQLname(sql);
                 handler.sendEmptyMessage(0);
             }
         }).start();
+        btn_reupload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(ReadmsgActivity.this,UserActivity.class);
+                it.putExtras(getIntent().getExtras());
+                startActivity(it);
+            }
+        });
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 }

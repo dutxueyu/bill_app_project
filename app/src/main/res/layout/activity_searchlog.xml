@@ -11,14 +11,26 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
+            android:id="@+id/search_title"
             android:layout_height="0dp"
             android:layout_weight="1"
-           android:layout_gravity="center"
+             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@color/royalblue"
             android:text="用户界面-报销查询"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/search_tip"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textSize="17sp"
+            android:textColor="@color/lightblue"
+            android:text="单击查看详情，长按记录，进行报销审核"/>
         <ListView
             android:id="@+id/list_itemw"
             android:layout_width="wrap_content"

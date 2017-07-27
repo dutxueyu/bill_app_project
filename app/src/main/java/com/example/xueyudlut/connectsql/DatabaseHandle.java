@@ -81,8 +81,6 @@ public class DatabaseHandle {
             con = DriverManager.getConnection(connStr, uid, pwd);
             String sql = "USE [bill_data] INSERT INTO [dbo].[T_Message] ([int_uid],[bill_code],[bill_num],[bill_date],[bill_moneynum],[image],[is_checked]) " +
                     "Values (?,?,?,?,?,?,'0')";
-//            String sql = "USE [bill_data] INSERT INTO [dbo].[Table_test] ([imgid],[img]) "+
-//                    "Values (?,?)";
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, id);
             pstm.setString(2, code);
@@ -90,8 +88,41 @@ public class DatabaseHandle {
             pstm.setString(4, date);
             pstm.setString(5, money);
             pstm.setBinaryStream(6, in, in.available());
+            count = pstm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            count = -1;
+        } finally {
+            try {
+                if (pstm != null)
+                    pstm.close();
+                if (con != null)
+                    con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return count;
+    }
 
-
+    public int updatewithImage(int id, String code, String num, String date, String money, String imgPath) {
+        int count = 0;
+        FileInputStream in = null;
+        try {
+            //加载驱动
+            Class.forName(drive);
+            in = ImageUtil.readImage(imgPath);
+            //建立数据库连接
+            con = DriverManager.getConnection(connStr, uid, pwd);
+            String sql = "USE [bill_data] update  [dbo].[T_Message]  set [int_uid] = ?,[bill_code] = ?,[bill_date] = ?,[bill_moneynum] = ?,[image] = ?,[is_checked] ='0' " +
+                    "where [bill_num] = ?";
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, id);
+            pstm.setString(2, code);
+            pstm.setString(3, date);
+            pstm.setString(4, money);
+            pstm.setString(6, num);
+            pstm.setBinaryStream(5, in, in.available());
             count = pstm.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

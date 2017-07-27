@@ -26,6 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private String sql = "USE [bill_data] insert into [Test_table]([id],[name]) values ('2','aaa')";
 
     public static  int main_uid = -1;
+    public  static int main_usermode = -1;
     // handler处理对象，用于在跨线程时，在线程间的响应，用于控制主线程的控件（不能跨线程控制控件）
     private Handler handler = new Handler(){
         @Override
@@ -64,8 +65,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         et_username = findViewById(R.id.txt_username);
         et_password = findViewById(R.id.txt_password);
         progressBar = findViewById(R.id.processbar);
-        et_username.setText("1");
-        et_password.setText("1");
+        et_username.setText("root");
+        et_password.setText("root");
     }
 
     @Override
@@ -97,6 +98,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     public void run() {
                         int []rs =databaseHandle.LoginSQL(logsql);
                         int get =rs[0];
+                        main_usermode =get;
                         main_uid = rs[1];
 
                         if(get>0){
