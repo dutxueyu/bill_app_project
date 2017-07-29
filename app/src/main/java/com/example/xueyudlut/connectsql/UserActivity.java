@@ -83,11 +83,11 @@ public class UserActivity extends Activity implements View.OnClickListener{
         findViewById(R.id.btn_QR).setOnClickListener(this);
         btn_getbillimage.setOnClickListener(this);
         //照片存储路径
-        SDpath = Environment.getExternalStorageDirectory().getPath()+ File.separator+"Android/data/"+getPackageName()+"files";
+        SDpath = Environment.getExternalStorageDirectory().getPath()+ File.separator+"Android/data/"+getPackageName()+"/files";
         ImagePath = SDpath+"/bill_image.png";
         smallImgPath =SDpath+"/"+"small_img.jpg";
         //判断是否为更新数据模式
-        final Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
         if (bundle!=null){
             get_string_num = bundle.getString("billnum");
             IsUpdateMode = true;
@@ -236,7 +236,6 @@ public class UserActivity extends Activity implements View.OnClickListener{
                         }
                     }).start();
                 }
-
                 break;
             case R.id.btn_getbillimage:
                 getImageFromCamera();
@@ -248,7 +247,8 @@ public class UserActivity extends Activity implements View.OnClickListener{
     private void getImageFromCamera() {
         Intent getImageByCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         Uri uri;
-        File dir = new File(SDpath);
+        getExternalFilesDir(null).getAbsolutePath();//在外部存储器储存文件，没有这句话无法新建目录
+        File dir = new File(SDpath+File.separator);
         boolean t =dir.mkdirs();
         if(Build.VERSION.SDK_INT>=24)
         {
@@ -258,7 +258,7 @@ public class UserActivity extends Activity implements View.OnClickListener{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            uri = FileProvider.getUriForFile(this,"xueyu404",g);
+            uri = FileProvider.getUriForFile(this,"com.example.xueyudlut.connectsql",g);
         }else{
             uri = Uri.fromFile(new File(ImagePath));
         }

@@ -33,7 +33,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what==0)
-                Toast.makeText(getApplicationContext(),"用户名或密码错误" +
+                Toast.makeText(getApplicationContext(),"用户名或密码错误或账户未通过审核" +
                         "！",Toast.LENGTH_LONG).show();
             if (msg.what==1){
                 Toast.makeText(getApplicationContext(),"登陆成功！",Toast.LENGTH_LONG).show();
@@ -65,8 +65,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         et_username = findViewById(R.id.txt_username);
         et_password = findViewById(R.id.txt_password);
         progressBar = findViewById(R.id.processbar);
-        et_username.setText("root");
-        et_password.setText("root");
+        et_username.setText("1");
+        et_password.setText("1");
     }
 
     @Override
@@ -79,7 +79,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void onClick(View view) {
 
 
-        progressBar.setVisibility(View.VISIBLE);
+
         switch (view.getId()){
             case R.id.btn_login:{
                 String psw = et_password.getText().toString();
@@ -92,8 +92,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     et_password.setError("密码不能为空！");
                     return;
                 }
+                progressBar.setVisibility(View.VISIBLE);
                 new Thread(new Runnable() {
-                    String logsql = "USE [bill_data] SELECT *  FROM [bill_data].[dbo].[T_User] where [s_loginName] ='"+et_username.getText().toString()+"' and [s_password]='"+et_password.getText().toString()+"'";
+                    String logsql = "USE [bill_data] SELECT *  FROM [bill_data].[dbo].[T_User] where int_boss_check ='1' and [s_loginName] ='"+et_username.getText().toString()+"' and [s_password]='"+et_password.getText().toString()+"'";
                     @Override
                     public void run() {
                         int []rs =databaseHandle.LoginSQL(logsql);

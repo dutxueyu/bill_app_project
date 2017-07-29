@@ -17,7 +17,17 @@
         android:layout_marginTop="60dp"
         android:text="管理员界面"
         />
-
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:text="公司ID："
+    android:id="@+id/ttid"
+    android:layout_marginTop="90dp"
+    android:textColor="@color/royalblue"/>
     <Button
         android:id="@+id/btn_usermanage"
         style="?android:textAppearanceSmall"
